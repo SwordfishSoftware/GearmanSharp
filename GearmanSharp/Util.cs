@@ -12,7 +12,7 @@ namespace Twingly.Gearman
         /// <summary>
         /// Splits a byte array on \0. Works as String.Split
         /// </summary>
-        public static byte[][] SplitArray(byte[] arr)
+        public static byte[][] SplitArray(byte[] arr, int max = -1)
         {
             const byte splitByte = 0;
 
@@ -20,7 +20,16 @@ namespace Twingly.Gearman
             int lastPos = 0;
             while (true)
             {
-                var pos = Array.IndexOf(arr, splitByte, lastPos);
+				int pos;
+				if (segments.Count < max - 1)
+				{
+					pos = Array.IndexOf (arr, splitByte, lastPos);
+				}
+				else
+				{
+					pos = -1;
+				}
+
                 if (pos == -1)
                 {
                     pos = arr.Length;

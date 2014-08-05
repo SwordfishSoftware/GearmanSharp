@@ -94,7 +94,7 @@ namespace Twingly.Gearman
 
         public static GearmanJobInfo UnpackJobAssignResponse(IResponsePacket response)
         {
-            var args = Util.SplitArray(response.GetData());
+            var args = Util.SplitArray(response.GetData(), 3);
             return new GearmanJobInfo
                    {
                        JobHandle = Encoding.UTF8.GetString(args[0]),
